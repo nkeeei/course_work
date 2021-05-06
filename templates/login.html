@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Вход
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row" style="margin-top: 80px; ">
+            <div class="col-lg text-white">
+                <div class="ml-2 mr-2" style="margin-left: 5%;margin-right: 5%;">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-danger" style="width: 300px">Войти</button>
+                    </form>
+                </div>
+         </div>
+        </div>
+    </div>
+{% endblock %}

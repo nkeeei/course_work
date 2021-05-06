@@ -1,0 +1,18 @@
+* {
+   margin: 0;
+   box-sizing: border-box;
+
+}
+
+body{
+   background-color: rgba(0,0,0,0.75);
+   font-family: 'Montserrat Alternates', sans-serif;
+
+}
+
+
+.form-date-schedule{
+   width: 100px;
+}
+
+

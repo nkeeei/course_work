@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Расписание
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row" style="margin-top: 80px; ">
+            <div class="col-lg-5">
+                <div style=" font-family: 'Orelega One', cursive; color: #c1d6cc">
+
+                    <form method="post"  style="width: 350px; left: 0;right: 0;">
+                        <div style="margin-bottom: 20px; ">{{ user.username }}, ознакомься с занятым временем, после чего забронируй себя время и кол-во часов ! <div style="color: rgba(174,19,0,1); font-style: italic">Будьте внимательны, не займите по ошибке чужое время ! </div> </div>
+                        {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit" class="btn btn-danger" style="width: 350px">Забронировать</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-6" style=" margin-left: 30px;">
+                <div class="col-lg-2">
+                    <div  style="margin-left: 30%; font-family: 'Orelega One', cursive; color: #c1d6cc">
+                        <div style="width: 500px; left: 0;right: 0;">
+                            Занятое время на студии "{{ studio.name }}" :
+                            {% for session in sessions %}
+                                <div class="card bg-dark " style="width: 570px; color: black; margin-bottom: 10px; margin-top: 10px;">
+                                  <ul class="list-group list-group-flush bg-gradient bg-dark">
+                                    <li class="list-group-item" >Дата: {{ session.date }} | Время: {{ session.time }}:00 | Кол-во часов: {{ session.count_hours }}</li>
+                                    <li class="list-group-item">Статус: {% if not session.is_active %}
+                                    На рассмотрении &#9993
+                                    {% elif session.is_active %} Одобрено &#10004
+                                        {% endif %}{% if user.is_superuser %}
+                                        {% if session.is_active %}
+                                        <a class="btn btn-primary" style="margin-left: 72px;" href="{% url 'change_session' pk=session.pk %}">Изменить статус</a>
+                                        <a class="btn btn-danger" style="margin-left: 3px;" href="{% url 'delete_session' pk=session.pk %}">Удалить запись</a>
+                                            {% else %}
+                                            <a class="btn btn-primary" style="margin-left: 10px;" href="{% url 'change_session' pk=session.pk %}">Изменить статус</a>
+                                        <a class="btn btn-danger" style="margin-left: 3px;" href="{% url 'delete_session' pk=session.pk %}">Удалить запись</a>
+                                         {% endif %}
+                                    {% endif %} </li>
+
+                                  </ul>
+                                </div>
+                            {% empty %}<br><br><br><br>
+                                Занятого времени на эту дату пока что нет!<br>
+                                Скорее выбирай время :)
+                            {% endfor %}
+                         <div>
+                             <a class="btn btn-info" href="{% url 'print_pdf' date %}">Распечатать</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

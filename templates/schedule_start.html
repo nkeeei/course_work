@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Расписание
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row" style="margin-top: 80px; ">
+            <div class="col-lg-5">
+                <div style=" font-family: 'Orelega One', cursive; color: #c1d6cc">
+
+                    <form method="get"  style="width: 350px; left: 0;right: 0;">
+                        <div style="margin-bottom: 20px; ">{{ user.username }}, выбери дату для брони времени ! </div>
+                        {% csrf_token %}
+                            {{ form.date }}
+                            <button type="submit" class="btn btn-danger" style="width: 350px;margin-top: 10px;">Выбрать</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Gorka zolotaya
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+      <div class="row" >
+        <div class="col-sm-3" style="margin-top: 100px; height: 541px">
+          <div class="text-center" >
+              <img src="{{ studio_image.image.url }}" class="rounded" style="height: 300px;width: 300px; margin-top: 15px; " alt="...">
+          </div>
+        </div>
+        <div class="col-sm-9 text-center" style=" margin-top: 100px; font-family: 'Zen Dots', cursive; color: #c1d6cc">
+            <div class="text-uppercase"  ><div class="display-3" style="color: rgba(255,206,62,1);" >{{ studio.name }}</div></div>
+            <p class="text-uppercase"  ><h1 class="lead" style="color: rgba(255,206,62,1); margin-left: 50px;" >{{ studio.description }}</h1>
+            {% if request.user.is_authenticated %}
+            {% else %}
+            <div class="lead" style="margin-top: 50px" ><div class="display-3" style="color: rgba(255,206,62,1); font-size: 30px">Зарегистрируйтесь, чтобы забронировать время ! </div></div>
+            {% endif %}
+        </div>
+
+      </div>
+    </div>
+
+{% endblock %}

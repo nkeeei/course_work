@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Оборудование
+{% endblock %}
+
+
+{% block content %}
+
+
+    <div class="container">
+        <div class="row">
+            {% for service in services %}
+                <div class="col-lg-3" >
+                    <div class="card text-white bg-dark " style="max-width: 540px; margin-top: 80px; font-family: 'Orelega One', cursive; " >
+                      <div class="row">
+                            <div class="col-lg">
+                              <img src="{{ service.image.url }}" class="card-img-top" style="margin: 25px; width: 200px; height: 200px; ">
+                            </div>
+                            <div class="col-lg" >
+                              <div class="card-body" style="height: 200px;color: #c1d6cc">
+                                <h5 class="card-title">{{ service.name }}</h5>
+                                <p class="card-text">{{ service.description| truncatechars_html:80 }}</p>
+                                <p class="card-subtitle" style="margin-bottom: 10px">  {{ service.price }} BYN </p>
+                              </div>
+                            </div>
+
+                      </div>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
